@@ -7,8 +7,13 @@ function makeUniqueAndRenumberKeys($arrayValue){
 	return array_values($arrayValue);
 }
 
-$addressesRaw = isset($_GET["addresses"])?$_GET["addresses"]:"";
+$addressesRaw = isset($_POST["addresses"])?
+					$_POST["addresses"]:
+					(isset($_GET["addresses"])?
+						$_GET["addresses"]:
+						"");
 $addressesRaw = preg_replace("/[^A-Za-z0-9,]/", "", $addressesRaw);
+$addressesRaw = preg_replace("/,/", ",\n", $addressesRaw);
 
 $outGraphCode="";
 
@@ -145,7 +150,12 @@ $graphFileContent=($outGraphCode)?$outGraphCode:"";
 			<form method="get">
 
 <textarea name="addresses" rows="10" style="width:100%;height:100%">
-<?if ($addressesRaw){?><?=$addressesRaw?><?}else{?>1K8ZCd8xpbKZXj2QotFSzPGrgb1YNQV1yT,18AFeTEXJKY3ueWMMDhKKcNLvrHR8sv17y,1B8KdKBHkhHaRP7a7ioTAErybTfRGsETGc
+<?if ($addressesRaw){?>
+<?=$addressesRaw?>
+<?}else{?>
+1K8ZCd8xpbKZXj2QotFSzPGrgb1YNQV1yT,
+18AFeTEXJKY3ueWMMDhKKcNLvrHR8sv17y,
+1B8KdKBHkhHaRP7a7ioTAErybTfRGsETGc
 <?}?>
 </textarea><br />
 
