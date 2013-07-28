@@ -8,14 +8,14 @@ function makeUniqueAndRenumberKeys($arrayValue){
 }
 
 $addressesRaw = isset($_GET["addresses"])?$_GET["addresses"]:"";
-$addressesRaw = ereg_replace("[^A-Za-z0-9,]", "", $addressesRaw);
+$addressesRaw = preg_replace("/[^A-Za-z0-9,]/", "", $addressesRaw);
 
 $outGraphCode="";
 
 if ($addressesRaw){
 
 	$addresses = trim($addressesRaw);
-	$addresses = split(',', $addresses);
+	$addresses = preg_split('/,/', $addresses);
 
 	$givenAddresses=null;
 	foreach ($addresses as $address){
