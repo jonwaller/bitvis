@@ -47,6 +47,9 @@ if ($addressesRaw){
 			$addressesInfo[$address]["inputs"]=null;
 			$addressesInfo[$address]["outputs"]=null;
 
+			//To avoid rendering error on addresses with loads of transactions
+			array_splice($transactions, 20);
+
 			foreach($transactions as $transaction){
 				$inputs = $transaction->inputs;
 				$outputs = $transaction->out;
